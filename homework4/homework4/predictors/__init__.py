@@ -1,0 +1,1 @@
+from homework4.predictors.name_classifier_predictor import NameClassifierPredictor

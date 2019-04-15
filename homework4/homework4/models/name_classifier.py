@@ -51,7 +51,9 @@ class NameClassifier(Model):
         encoded_name = self.name_encoder(embedded_name, name_mask)
 
         logits = self.classifier_feedforward(encoded_name)
-        output_dict = {'logits': logits}
+        class_probabilities = F.softmax(logits, dim=-1)
+
+        output_dict = {"class_probabilities": class_probabilities}
         if label is not None:
             loss = self.loss(logits, label.squeeze(-1))
             for metric in self.metrics.values():
@@ -66,16 +68,9 @@ class NameClassifier(Model):
         Does a simple argmax over the class probabilities, converts indices to string labels, and
         adds a ``"label"`` key to the dictionary with the result.
         """
-        class_probabilities = F.softmax(output_dict['logits'])
-        output_dict['class_probabilities'] = class_probabilities
-
-        predictions = class_probabilities.cpu().data.numpy()
-        argmax_indices = numpy.argmax(predictions)
+        predictions = output_dict['class_probabilities'].cpu().data.numpy()
+        argmax_indices = numpy.argmax(predictions, axis=-1)
         labels = [self.vocab.get_token_from_index(x, namespace="labels")
                   for x in argmax_indices]
         output_dict['label'] = labels
         return output_dict
-
-    @overrides
-    def get_metrics(self, reset: bool = False) -> Dict[str, float]:
-        return {metric_name: metric.get_metric(reset) for metric_name, metric in self.metrics.items()}

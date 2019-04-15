@@ -35,7 +35,7 @@ class NamesDatasetReader(DatasetReader):
                         yield self.text_to_instance(name, lang)
 
     @overrides
-    def text_to_instance(self, name: str, lang: str) -> Instance:
+    def text_to_instance(self, name: str, lang: str = None) -> Instance:
         tokenized_name = self._tokenizer.tokenize(name)
         name_field = TextField(tokenized_name, self._token_indexers)
         fields = {'name': name_field}
