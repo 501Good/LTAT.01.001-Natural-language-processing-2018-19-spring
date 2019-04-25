@@ -1,0 +1,1 @@
+allennlp evaluate out_elmo/model.tar.gz homework5/data/stanfordSentimentTreebank/trees/test.txt --include-package homework5 --cuda-device 0

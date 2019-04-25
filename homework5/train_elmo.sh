@@ -1,0 +1,1 @@
+allennlp train sst_classifier_elmo.json --serialization-dir ./out_elmo/ --include-package homework5

@@ -102,3 +102,18 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+homework5/out_baseline/*
+!homework5/out_baseline/stderr.log
+!homework5/out_baseline/stdout.log
+!homework5/out_baseline/metrics.json
+
+homework5/out_elmo/*
+!homework5/out_elmo/stderr.log
+!homework5/out_elmo/stdout.log
+!homework5/out_elmo/metrics.json
+
+homework5/out_bert/*
+!homework5/out_bert/stderr.log
+!homework5/out_bert/stdout.log
+!homework5/out_bert/metrics.json

@@ -1,0 +1,1 @@
+from homework5.predictors.predictors import SentenceClassifierPredictor
