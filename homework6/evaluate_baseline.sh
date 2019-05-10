@@ -1,0 +1,1 @@
+allennlp evaluate out_baseline/model.tar.gz homework5/data/stanfordSentimentTreebank/trees/test.txt --include-package homework6 --cuda-device 0

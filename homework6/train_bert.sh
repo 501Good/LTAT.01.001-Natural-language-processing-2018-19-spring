@@ -1,0 +1,1 @@
+allennlp train sst_classifier_bert.json --serialization-dir ./out_bert/ --include-package homework6

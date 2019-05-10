@@ -1,0 +1,51 @@
+{
+  "dataset_reader": {
+    "type": "sst_tokens",
+    "token_indexers": {
+      "bert": {
+        "type": "bert-pretrained",
+        "pretrained_model": "bert-base-uncased",
+        "do_lowercase": false,
+        "use_starting_offsets": true,
+        "max_pieces": 100
+      }
+    }
+  },
+  "train_data_path": "homework5/data/stanfordSentimentTreebank/trees/train.txt",
+  "validation_data_path": "homework5/data/stanfordSentimentTreebank/trees/dev.txt",
+
+  "model": {
+    "type": "lstm_classifier",
+
+    "word_embeddings": {
+      "allow_unmatched_keys": true,
+      "token_embedders": {
+        "bert": {
+          "type": "bert-pretrained",
+          "pretrained_model": "bert-base-uncased"
+        }
+      }
+    },
+
+    "encoder": {
+      "type": "gru",
+      "input_size": 768,
+      "hidden_size": 64,
+      "dropout": 0.5,
+      "bidirectional": true,
+      "num_layers": 2
+    }
+  },
+  "iterator": {
+    "type": "bucket",
+    "batch_size": 32,
+    "sorting_keys": [["tokens", "num_tokens"]]
+  },
+  "trainer": {
+    "optimizer": "adam",
+    "num_epochs": 20,
+    "patience": 5,
+    "validation_metric": "+accuracy",
+    "cuda_device": -1
+  }
+}
