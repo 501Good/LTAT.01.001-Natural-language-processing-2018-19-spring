@@ -15,7 +15,7 @@ from allennlp.nn.util import get_text_field_mask
 from allennlp.training.metrics import CategoricalAccuracy, F1Measure
 from allennlp.training.trainer import Trainer
 
-from homework5.predictors.predictors import SentenceClassifierPredictor
+from homework6.predictors.predictors import SentenceClassifierPredictor
 
 EMBEDDING_DIM = 128
 HIDDEN_DIM = 128
